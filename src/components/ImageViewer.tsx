@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 
+
 interface ImageItem {
   src: string;
   alt: string;
