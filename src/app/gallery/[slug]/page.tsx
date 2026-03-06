@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getPostBySlug, getGalleryPosts, formatDate, getFeaturedImageUrl, getFeaturedImageAlt, extractImagesFromContent } from '@/lib/wordpress';
+import ImageViewer from '@/components/ImageViewer';
 
 export const revalidate = 60;
 
@@ -117,25 +118,17 @@ export default async function GalleryAlbumPage({ params }: { params: Params }) {
         </div>
       </section>
 
-      {/* Image Grid (from extracted images, if content didn't render them as gallery) */}
-      {allImages.length > 1 && (
-        <section className="py-16 bg-gray-50">
+      {/* Image Viewer */}
+      {allImages.length > 0 && (
+        <section className="py-12 sm:py-16 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-bold text-[#1a1a2e] mb-8">All Photos</h2>
-            <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-              {allImages.map((img, index) => (
-                <div
-                  key={index}
-                  className="break-inside-avoid overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500"
-                >
-                  <img
-                    src={img.src}
-                    alt={img.alt || post.title}
-                    className="w-full h-auto"
-                  />
-                </div>
-              ))}
-            </div>
+            <h2 className="text-2xl font-bold text-[#1a1a2e] mb-6 sm:mb-8">
+              Photos
+              <span className="text-base font-normal text-gray-500 ml-2">
+                ({allImages.length})
+              </span>
+            </h2>
+            <ImageViewer images={allImages} albumTitle={post.title} />
           </div>
         </section>
       )}
