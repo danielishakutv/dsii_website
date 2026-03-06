@@ -108,26 +108,10 @@ export default async function GalleryAlbumPage({ params }: { params: Params }) {
         </div>
       </section>
 
-      {/* Album Content - render WordPress content which may contain gallery blocks */}
-      <section className="py-16 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div
-            className="wp-content"
-            dangerouslySetInnerHTML={{ __html: post.content }}
-          />
-        </div>
-      </section>
-
       {/* Image Viewer */}
       {allImages.length > 0 && (
-        <section className="py-12 sm:py-16 bg-gray-50">
+        <section className="py-12 sm:py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-bold text-[#1a1a2e] mb-6 sm:mb-8">
-              Photos
-              <span className="text-base font-normal text-gray-500 ml-2">
-                ({allImages.length})
-              </span>
-            </h2>
             <ImageViewer images={allImages} albumTitle={post.title} />
           </div>
         </section>
