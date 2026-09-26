@@ -15,11 +15,11 @@ export default function AboutSection() {
               />
             </div>
             {/* Decorative elements */}
-            <div className="absolute -top-6 -left-6 w-24 h-24 bg-[#b86e32]/20 rounded-2xl -z-0" />
-            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-[#1e5c45]/20 rounded-2xl -z-0" />
+            <div className="absolute -top-3 -left-3 sm:-top-6 sm:-left-6 w-24 h-24 bg-[#b86e32]/20 rounded-2xl -z-0" />
+            <div className="absolute -bottom-3 -right-3 sm:-bottom-6 sm:-right-6 w-32 h-32 bg-[#1e5c45]/20 rounded-2xl -z-0" />
             
             {/* Stats Card */}
-            <div className="absolute -bottom-8 -right-8 bg-white rounded-2xl shadow-xl p-6 z-20">
+            <div className="absolute -bottom-8 -right-2 sm:-right-8 bg-white rounded-2xl shadow-xl p-6 z-20">
               <div className="text-center">
                 <div className="text-4xl font-bold text-[#1e5c45]">5+</div>
                 <div className="text-gray-500 text-sm">Years of Impact</div>
