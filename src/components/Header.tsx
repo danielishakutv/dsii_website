@@ -12,6 +12,7 @@ export default function Header() {
     { href: '/projects', label: 'Projects' },
     { href: '/team', label: 'Team' },
     { href: '/gallery', label: 'Gallery' },
+    { href: '/health-awareness', label: 'Health Awareness' },
     { href: '/news', label: 'News' },
     { href: '/contact', label: 'Contact' },
   ];
@@ -34,12 +35,12 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center lg:space-x-5 xl:space-x-8">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-gray-600 hover:text-[#1e5c45] font-medium transition-colors duration-300 relative group"
+                className="text-gray-600 hover:text-[#1e5c45] font-medium transition-colors duration-300 relative group whitespace-nowrap lg:text-sm xl:text-base"
               >
                 {link.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#1e5c45] transition-all duration-300 group-hover:w-full"></span>
@@ -91,7 +92,7 @@ export default function Header() {
         {/* Mobile Navigation */}
         <div
           className={`lg:hidden transition-all duration-300 overflow-hidden ${
-            isMenuOpen ? 'max-h-96 pb-6' : 'max-h-0'
+            isMenuOpen ? 'max-h-[32rem] pb-6' : 'max-h-0'
           }`}
         >
           <div className="flex flex-col space-y-4 pt-4 border-t">

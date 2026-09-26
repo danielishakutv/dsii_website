@@ -172,6 +172,12 @@ export async function getGalleryPosts(first: number = 50): Promise<WPPost[]> {
   return getPostsByCategory('gallery', first);
 }
 
+export async function getHealthAwarenessPosts(
+  first: number = 50
+): Promise<WPPost[]> {
+  return getPostsByCategory('health-awareness', first);
+}
+
 export async function getHeroImage(): Promise<string | null> {
   const posts = await getPostsByCategory('hero-image', 1);
   if (posts.length === 0) return null;

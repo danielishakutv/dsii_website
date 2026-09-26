@@ -57,6 +57,7 @@ export default function Footer() {
                 { href: '/projects', label: 'Our Projects' },
                 { href: '/team', label: 'Our Team' },
                 { href: '/gallery', label: 'Gallery' },
+                { href: '/health-awareness', label: 'Health Awareness' },
                 { href: '/news', label: 'News & Updates' },
                 { href: '/contact', label: 'Contact Us' },
                 { href: '/donate', label: 'Donate' },
