@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Hero from "@/components/Hero";
 import AboutSection from "@/components/AboutSection";
+import LeadershipSection from "@/components/LeadershipSection";
 import FocusAreas from "@/components/FocusAreas";
 import ProjectsSection from "@/components/ProjectsSection";
 import NewsSection from "@/components/NewsSection";
@@ -13,6 +14,7 @@ export default function Home() {
         <Hero />
       </Suspense>
       <AboutSection />
+      <LeadershipSection />
       <FocusAreas />
       <Suspense fallback={<SectionSkeleton />}>
         <ProjectsSection />
