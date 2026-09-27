@@ -6,6 +6,7 @@ import {
   getExcerpt,
   getFeaturedImageUrl,
   getFeaturedImageAlt,
+  hasFeaturedImage,
 } from '@/lib/wordpress';
 
 export const metadata: Metadata = {
@@ -154,25 +155,36 @@ export default async function HealthAwarenessPage() {
               Latest Article
             </h2>
 
-            <article className="group grid lg:grid-cols-2 gap-0 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
-              <Link
-                href={`/health-awareness/${lead.slug}`}
-                className="relative h-64 sm:h-80 lg:h-full lg:min-h-[24rem] overflow-hidden block"
-              >
-                <img
-                  src={getFeaturedImageUrl(lead)}
-                  alt={getFeaturedImageAlt(lead)}
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 bg-[#b86e32] text-white text-xs font-medium rounded-full">
-                    Latest
-                  </span>
-                </div>
-              </Link>
+            <article
+              className={`group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 ${
+                hasFeaturedImage(lead) ? 'grid lg:grid-cols-2 gap-0' : ''
+              }`}
+            >
+              {hasFeaturedImage(lead) && (
+                <Link
+                  href={`/health-awareness/${lead.slug}`}
+                  className="relative h-64 sm:h-80 lg:h-full lg:min-h-[24rem] overflow-hidden block"
+                >
+                  <img
+                    src={getFeaturedImageUrl(lead)}
+                    alt={getFeaturedImageAlt(lead)}
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="px-3 py-1 bg-[#b86e32] text-white text-xs font-medium rounded-full">
+                      Latest
+                    </span>
+                  </div>
+                </Link>
+              )}
 
               <div className="p-8 lg:p-10 flex flex-col justify-center">
                 <div className="flex items-center gap-4 mb-4">
+                  {!hasFeaturedImage(lead) && (
+                    <span className="px-3 py-1 bg-[#b86e32] text-white text-xs font-medium rounded-full">
+                      Latest
+                    </span>
+                  )}
                   <span className="px-3 py-1 bg-[#1e5c45]/10 text-[#1e5c45] text-xs font-medium rounded-full">
                     Health Awareness
                   </span>
@@ -227,16 +239,18 @@ export default async function HealthAwarenessPage() {
                   key={item.id}
                   className="group bg-gray-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
                 >
-                  <Link
-                    href={`/health-awareness/${item.slug}`}
-                    className="relative h-48 overflow-hidden block"
-                  >
-                    <img
-                      src={getFeaturedImageUrl(item)}
-                      alt={getFeaturedImageAlt(item)}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                  </Link>
+                  {hasFeaturedImage(item) && (
+                    <Link
+                      href={`/health-awareness/${item.slug}`}
+                      className="relative h-48 overflow-hidden block"
+                    >
+                      <img
+                        src={getFeaturedImageUrl(item)}
+                        alt={getFeaturedImageAlt(item)}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                    </Link>
+                  )}
                   <div className="p-6">
                     <div className="flex items-center gap-4 mb-3">
                       <span className="px-3 py-1 bg-[#1e5c45]/10 text-[#1e5c45] text-xs font-medium rounded-full">

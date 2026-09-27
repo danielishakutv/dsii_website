@@ -8,6 +8,7 @@ import {
   getExcerpt,
   getFeaturedImageUrl,
   getFeaturedImageAlt,
+  hasFeaturedImage,
   type WPPost,
 } from '@/lib/wordpress';
 
@@ -204,16 +205,18 @@ export default async function HealthAwarenessArticlePage({
                   key={item.id}
                   className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
                 >
-                  <Link
-                    href={`/health-awareness/${item.slug}`}
-                    className="relative h-40 overflow-hidden block"
-                  >
-                    <img
-                      src={getFeaturedImageUrl(item)}
-                      alt={getFeaturedImageAlt(item)}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                  </Link>
+                  {hasFeaturedImage(item) && (
+                    <Link
+                      href={`/health-awareness/${item.slug}`}
+                      className="relative h-40 overflow-hidden block"
+                    >
+                      <img
+                        src={getFeaturedImageUrl(item)}
+                        alt={getFeaturedImageAlt(item)}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                    </Link>
+                  )}
                   <div className="p-6">
                     <span className="text-gray-500 text-xs">
                       {formatDate(item.date)}

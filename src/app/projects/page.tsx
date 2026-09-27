@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { getProjectsPosts, getExcerpt, getFeaturedImageUrl, getFeaturedImageAlt } from '@/lib/wordpress';
+import { getProjectsPosts, getExcerpt, getFeaturedImageUrl, getFeaturedImageAlt, hasFeaturedImage } from '@/lib/wordpress';
 
 export const metadata: Metadata = {
   title: 'Our Projects | Deeds Support Initiative International',
@@ -49,32 +49,41 @@ export default async function ProjectsPage() {
                   className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 block"
                 >
                   {/* Image */}
-                  <div className="relative h-56 overflow-hidden">
-                    <img
-                      src={getFeaturedImageUrl(project)}
-                      alt={getFeaturedImageAlt(project)}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                    <div className="absolute top-4 left-4 flex gap-2 flex-wrap">
-                      {project.categories.nodes
-                        .filter((cat) => cat.slug !== 'projects')
-                        .map((cat) => (
-                          <span
-                            key={cat.slug}
-                            className="px-3 py-1 bg-[#b86e32] text-white text-xs font-medium rounded-full"
-                          >
-                            {cat.name}
-                          </span>
-                        ))}
+                  {hasFeaturedImage(project) && (
+                    <div className="relative h-56 overflow-hidden">
+                      <img
+                        src={getFeaturedImageUrl(project)}
+                        alt={getFeaturedImageAlt(project)}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                      <div className="absolute top-4 left-4 flex gap-2 flex-wrap">
+                        {project.categories.nodes
+                          .filter((cat) => cat.slug !== 'projects')
+                          .map((cat) => (
+                            <span
+                              key={cat.slug}
+                              className="px-3 py-1 bg-[#b86e32] text-white text-xs font-medium rounded-full"
+                            >
+                              {cat.name}
+                            </span>
+                          ))}
+                      </div>
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <h3 className="text-xl font-bold text-white">{project.title}</h3>
+                      </div>
                     </div>
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="text-xl font-bold text-white">{project.title}</h3>
-                    </div>
-                  </div>
+                  )}
 
                   {/* Content */}
                   <div className="p-6 space-y-4">
+                    {/* The title is drawn over the image; without one it
+                        has to appear here or the card would be untitled. */}
+                    {!hasFeaturedImage(project) && (
+                      <h3 className="text-xl font-bold text-[#1a1a2e] group-hover:text-[#1e5c45] transition-colors">
+                        {project.title}
+                      </h3>
+                    )}
                     <p className="text-gray-600 text-sm line-clamp-3">
                       {getExcerpt(project.excerpt, 200)}
                     </p>

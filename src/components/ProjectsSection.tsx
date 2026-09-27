@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getProjectsPosts, getExcerpt, getFeaturedImageUrl, getFeaturedImageAlt } from '@/lib/wordpress';
+import { getProjectsPosts, getExcerpt, getFeaturedImageUrl, getFeaturedImageAlt, hasFeaturedImage } from '@/lib/wordpress';
 
 export default async function ProjectsSection() {
   const posts = await getProjectsPosts(3);
@@ -34,25 +34,27 @@ export default async function ProjectsSection() {
               className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 card-hover block"
             >
               {/* Image */}
-              <div className="relative h-56 overflow-hidden">
-                <img
-                  src={getFeaturedImageUrl(project)}
-                  alt={getFeaturedImageAlt(project)}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                {project.categories.nodes
-                  .filter((cat) => cat.slug !== 'projects')
-                  .slice(0, 1)
-                  .map((cat) => (
-                    <span
-                      key={cat.slug}
-                      className="absolute top-4 left-4 px-3 py-1 bg-[#b86e32] text-white text-xs font-medium rounded-full"
-                    >
-                      {cat.name}
-                    </span>
-                  ))}
-              </div>
+              {hasFeaturedImage(project) && (
+                <div className="relative h-56 overflow-hidden">
+                  <img
+                    src={getFeaturedImageUrl(project)}
+                    alt={getFeaturedImageAlt(project)}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  {project.categories.nodes
+                    .filter((cat) => cat.slug !== 'projects')
+                    .slice(0, 1)
+                    .map((cat) => (
+                      <span
+                        key={cat.slug}
+                        className="absolute top-4 left-4 px-3 py-1 bg-[#b86e32] text-white text-xs font-medium rounded-full"
+                      >
+                        {cat.name}
+                      </span>
+                    ))}
+                </div>
+              )}
 
               {/* Content */}
               <div className="p-6 space-y-4">

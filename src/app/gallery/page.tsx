@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { getGalleryPosts, getFeaturedImageUrl, getFeaturedImageAlt, formatDate, getExcerpt } from '@/lib/wordpress';
+import { getGalleryPosts, getFeaturedImageUrl, getFeaturedImageAlt, hasFeaturedImage, formatDate, getExcerpt } from '@/lib/wordpress';
 
 export const metadata: Metadata = {
   title: 'Gallery | Deeds Support Initiative International',
@@ -49,44 +49,58 @@ export default async function GalleryPage() {
                   className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
                 >
                   {/* Cover Image */}
-                  <div className="relative h-64 overflow-hidden">
-                    <img
-                      src={getFeaturedImageUrl(post)}
-                      alt={getFeaturedImageAlt(post)}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  {hasFeaturedImage(post) && (
+                    <div className="relative h-64 overflow-hidden">
+                      <img
+                        src={getFeaturedImageUrl(post)}
+                        alt={getFeaturedImageAlt(post)}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
-                    {/* Category badges */}
-                    <div className="absolute top-4 left-4 flex gap-2 flex-wrap">
-                      {post.categories.nodes
-                        .filter((cat) => cat.slug !== 'gallery')
-                        .map((cat) => (
-                          <span
-                            key={cat.slug}
-                            className="px-3 py-1 bg-[#b86e32] text-white text-xs font-medium rounded-full"
-                          >
-                            {cat.name}
-                          </span>
-                        ))}
-                    </div>
+                      {/* Category badges */}
+                      <div className="absolute top-4 left-4 flex gap-2 flex-wrap">
+                        {post.categories.nodes
+                          .filter((cat) => cat.slug !== 'gallery')
+                          .map((cat) => (
+                            <span
+                              key={cat.slug}
+                              className="px-3 py-1 bg-[#b86e32] text-white text-xs font-medium rounded-full"
+                            >
+                              {cat.name}
+                            </span>
+                          ))}
+                      </div>
 
-                    {/* Album icon */}
-                    <div className="absolute top-4 right-4 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center">
-                      <svg className="w-5 h-5 text-[#1e5c45]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                      </svg>
-                    </div>
+                      {/* Album icon */}
+                      <div className="absolute top-4 right-4 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center">
+                        <svg className="w-5 h-5 text-[#1e5c45]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                      </div>
 
-                    {/* Title on image */}
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="text-white font-bold text-lg">{post.title}</h3>
-                      <p className="text-gray-300 text-sm">{formatDate(post.date)}</p>
+                      {/* Title on image */}
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <h3 className="text-white font-bold text-lg">{post.title}</h3>
+                        <p className="text-gray-300 text-sm">{formatDate(post.date)}</p>
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   {/* Content preview */}
                   <div className="p-6">
+                    {/* Title and date sit on the cover image; with no cover
+                        they belong here instead. */}
+                    {!hasFeaturedImage(post) && (
+                      <div className="mb-3">
+                        <h3 className="text-[#1a1a2e] font-bold text-lg">
+                          {post.title}
+                        </h3>
+                        <p className="text-gray-500 text-sm">
+                          {formatDate(post.date)}
+                        </p>
+                      </div>
+                    )}
                     <p className="text-gray-600 text-sm line-clamp-2">
                       {getExcerpt(post.excerpt, 120)}
                     </p>

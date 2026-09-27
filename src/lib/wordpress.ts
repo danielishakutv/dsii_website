@@ -225,14 +225,24 @@ export function getExcerpt(text: string, maxLength: number = 160): string {
   return stripped.substring(0, maxLength).replace(/\s+\S*$/, '') + '...';
 }
 
+/**
+ * A post with no featured image used to fall back to a stock photo of
+ * children, which on an NGO site reads as a real photograph of real
+ * beneficiaries. It is not one. Rather than substitute any image, callers
+ * check hasFeaturedImage() and render no image block at all.
+ */
+export function hasFeaturedImage(post: WPPost): boolean {
+  return Boolean(post.featuredImage?.node?.sourceUrl);
+}
+
 export function getFeaturedImageUrl(post: WPPost): string {
-  return (
-    post.featuredImage?.node?.sourceUrl ||
-    'https://images.unsplash.com/photo-1497486751825-1233686d5d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-  );
+  return post.featuredImage?.node?.sourceUrl || '';
 }
 
 export function getFeaturedImageAlt(post: WPPost): string {
+  // The placeholder depicts nothing, so describing it with the article
+  // title would mislead a screen reader. Empty alt marks it decorative.
+  if (!hasFeaturedImage(post)) return '';
   return post.featuredImage?.node?.altText || post.title;
 }
 

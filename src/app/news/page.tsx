@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { getNewsPosts, formatDate, getExcerpt, getFeaturedImageUrl, getFeaturedImageAlt } from '@/lib/wordpress';
+import { getNewsPosts, formatDate, getExcerpt, getFeaturedImageUrl, getFeaturedImageAlt, hasFeaturedImage } from '@/lib/wordpress';
 
 export const metadata: Metadata = {
   title: 'News & Updates | Deeds Support Initiative International',
@@ -51,18 +51,20 @@ export default async function NewsPage() {
                   key={item.id}
                   className="group bg-gray-50 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-500"
                 >
-                  <Link href={`/news/${item.slug}`} className="relative h-64 overflow-hidden block">
-                    <img
-                      src={getFeaturedImageUrl(item)}
-                      alt={getFeaturedImageAlt(item)}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1 bg-[#b86e32] text-white text-xs font-medium rounded-full">
-                        Featured
-                      </span>
-                    </div>
-                  </Link>
+                  {hasFeaturedImage(item) && (
+                    <Link href={`/news/${item.slug}`} className="relative h-64 overflow-hidden block">
+                      <img
+                        src={getFeaturedImageUrl(item)}
+                        alt={getFeaturedImageAlt(item)}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute top-4 left-4">
+                        <span className="px-3 py-1 bg-[#b86e32] text-white text-xs font-medium rounded-full">
+                          Featured
+                        </span>
+                      </div>
+                    </Link>
+                  )}
                   <div className="p-8">
                     <div className="flex items-center gap-4 mb-4">
                       <span className="px-3 py-1 bg-[#1e5c45]/10 text-[#1e5c45] text-xs font-medium rounded-full">
@@ -103,13 +105,15 @@ export default async function NewsPage() {
                   key={item.id}
                   className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
                 >
-                  <Link href={`/news/${item.slug}`} className="relative h-48 overflow-hidden block">
-                    <img
-                      src={getFeaturedImageUrl(item)}
-                      alt={getFeaturedImageAlt(item)}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                  </Link>
+                  {hasFeaturedImage(item) && (
+                    <Link href={`/news/${item.slug}`} className="relative h-48 overflow-hidden block">
+                      <img
+                        src={getFeaturedImageUrl(item)}
+                        alt={getFeaturedImageAlt(item)}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                    </Link>
+                  )}
                   <div className="p-6">
                     <div className="flex items-center gap-4 mb-3">
                       <span className="px-3 py-1 bg-[#1e5c45]/10 text-[#1e5c45] text-xs font-medium rounded-full">

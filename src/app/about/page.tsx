@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { getAboutImage, getTeamPosts, getFeaturedImageUrl, getFeaturedImageAlt, extractParagraphs } from '@/lib/wordpress';
+import { getAboutImage, getTeamPosts, getFeaturedImageUrl, getFeaturedImageAlt, hasFeaturedImage, extractParagraphs } from '@/lib/wordpress';
 
 export const metadata: Metadata = {
   title: 'About Us | Deeds Support Initiative International',
@@ -236,14 +236,16 @@ export default async function AboutPage() {
                   href={`/team/${member.slug}`}
                   className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
                 >
-                  <div className="relative h-64 overflow-hidden">
-                    <img
-                      src={getFeaturedImageUrl(member)}
-                      alt={getFeaturedImageAlt(member)}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  </div>
+                  {hasFeaturedImage(member) && (
+                    <div className="relative h-64 overflow-hidden">
+                      <img
+                        src={getFeaturedImageUrl(member)}
+                        alt={getFeaturedImageAlt(member)}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    </div>
+                  )}
                   <div className="p-6">
                     {(() => {
                       const paras = extractParagraphs(member.content);

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getNewsPosts, formatDate, getExcerpt, getFeaturedImageUrl, getFeaturedImageAlt } from '@/lib/wordpress';
+import { getNewsPosts, formatDate, getExcerpt, getFeaturedImageUrl, getFeaturedImageAlt, hasFeaturedImage } from '@/lib/wordpress';
 
 export default async function NewsSection() {
   const posts = await getNewsPosts(3);
@@ -40,18 +40,20 @@ export default async function NewsSection() {
               className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 card-hover"
             >
               {/* Image */}
-              <Link href={`/news/${item.slug}`} className="relative h-48 overflow-hidden block">
-                <img
-                  src={getFeaturedImageUrl(item)}
-                  alt={getFeaturedImageAlt(item)}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 bg-[#1e5c45] text-white text-xs font-medium rounded-full">
-                    {item.categories.nodes[0]?.name || 'News'}
-                  </span>
-                </div>
-              </Link>
+              {hasFeaturedImage(item) && (
+                <Link href={`/news/${item.slug}`} className="relative h-48 overflow-hidden block">
+                  <img
+                    src={getFeaturedImageUrl(item)}
+                    alt={getFeaturedImageAlt(item)}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="px-3 py-1 bg-[#1e5c45] text-white text-xs font-medium rounded-full">
+                      {item.categories.nodes[0]?.name || 'News'}
+                    </span>
+                  </div>
+                </Link>
+              )}
 
               {/* Content */}
               <div className="p-6 space-y-4">
