@@ -6,17 +6,16 @@ const CREDENTIALS = [
   'Chartered Administrator',
   'HSE Expert',
   'Researcher',
-  'Humanitarian & Community Development Practitioner',
 ];
 
 export default function LeadershipSection() {
   return (
     <section className="py-20 lg:py-32 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-5 gap-12 lg:gap-16 items-start">
+        <div className="grid lg:grid-cols-5 gap-12 lg:gap-16 items-center">
           {/* Portrait */}
           <div className="lg:col-span-2">
-            <div className="relative lg:sticky lg:top-28">
+            <div className="relative">
               <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl">
                 <img
                   src="/dr-emmanuella-dike.jpg"
@@ -72,66 +71,29 @@ export default function LeadershipSection() {
               ))}
             </ul>
 
-            <div className="space-y-5">
-              <p className="text-gray-600 text-lg leading-relaxed">
-                Dr. Emmanuella Dike is a Development Sociologist, Social Work
-                Professional, Chartered Administrator, Health, Safety and
-                Environment (HSE) Expert, researcher and humanitarian
-                practitioner with over 18 years of experience in social
-                development, community outreach, research, monitoring and
-                evaluation, advocacy and humanitarian programming.
-              </p>
-
-              <p className="text-gray-600 leading-relaxed">
-                She holds a Ph.D. in Development Sociology from the University
-                of Calabar (2023), with doctoral research focused on the
-                socio-economic wellbeing of women during the COVID-19 pandemic.
-                She also holds a Diploma and B.Sc. in Social Work and
-                Administration from the University of Jos.
-              </p>
-
-              <p className="text-gray-600 leading-relaxed">
-                Dr. Dike founded Deeds Support Initiative International (DSII) in
-                2020 out of a deep commitment to changing lives, empowering
-                vulnerable people and giving women, girls and children a
-                stronger voice. Her professional interests include women and
-                girls&rsquo; empowerment, child protection, community
-                development, public health, mental health awareness, HSE, social
-                protection and research.
-              </p>
-
-              <p className="text-gray-600 leading-relaxed">
-                As an HSE professional and member of the Institute of Safety
-                Professionals of Nigeria (ISPON), she is committed to promoting
-                safety awareness, responsible practices and wellbeing across
-                communities and development programmes.
-              </p>
-            </div>
+            <p className="text-gray-600 text-lg leading-relaxed">
+              A Development Sociologist and humanitarian practitioner with over
+              18 years in social development, community outreach, research and
+              advocacy. She holds a Ph.D. in Development Sociology from the
+              University of Calabar and founded DSII in 2020 to give women,
+              girls and children a stronger voice.
+            </p>
 
             {/* Vision pull-quote */}
             <blockquote className="border-l-4 border-[#b86e32] bg-white rounded-r-2xl px-6 py-5 shadow-sm">
               <p className="text-[#1a1a2e] leading-relaxed">
-                A key part of her vision is to improve access to mental health
-                awareness and psychosocial support in Nigeria, while creating
-                meaningful opportunities for social workers to apply their
-                expertise within communities. She envisions a future where
-                professional counselling and support can be just a call away.
+                &ldquo;I want to see a Nigeria where mental health support is
+                within reach of everyone &mdash; where professional counselling
+                can be just a call away.&rdquo;
               </p>
             </blockquote>
 
-            <p className="text-gray-600 leading-relaxed">
-              Through her leadership of DSII, Dr. Dike is committed to turning
-              compassion into action and contributing to a society where
-              vulnerable people are protected, empowered and given opportunities
-              to thrive.
-            </p>
-
             <div className="flex flex-wrap gap-4 pt-2">
               <Link
-                href="/team"
+                href="/team/emmanuella-dike-phd"
                 className="inline-flex items-center px-8 py-3.5 bg-[#1e5c45] text-white rounded-full font-semibold hover:bg-[#14432e] transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
               >
-                Meet the full team
+                Read full profile
                 <svg
                   className="w-5 h-5 ml-2"
                   fill="none"
@@ -147,10 +109,10 @@ export default function LeadershipSection() {
                 </svg>
               </Link>
               <Link
-                href="/health-awareness"
+                href="/team"
                 className="inline-flex items-center px-8 py-3.5 border-2 border-[#1e5c45] text-[#1e5c45] rounded-full font-semibold hover:bg-[#1e5c45] hover:text-white transition-all duration-300"
               >
-                Health Awareness
+                Meet the team
               </Link>
             </div>
           </div>
