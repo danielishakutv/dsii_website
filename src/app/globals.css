@@ -107,11 +107,30 @@ html { scroll-behavior: smooth; }
 
 /* Base WordPress content wrapper */
 .wp-content {
-  font-size: 1.2rem;
-  line-height: 1.9;
+  font-size: 1.125rem;
+  /* 1.9 made the gap *inside* a paragraph larger than the gap between
+     paragraphs, so body copy read as one undifferentiated block. */
+  line-height: 1.75;
   color: #374151;
   word-wrap: break-word;
   overflow-wrap: break-word;
+}
+
+/* Cap the measure on text only, not on the wrapper: constraining
+   .wp-content itself would shrink in-article images and tables too.
+   Left edge stays aligned with media, so nothing looks indented.
+   The old full-width measure ran to ~95 characters per line. */
+.wp-content p,
+.wp-content ul,
+.wp-content ol,
+.wp-content h1,
+.wp-content h2,
+.wp-content h3,
+.wp-content h4,
+.wp-content h5,
+.wp-content h6,
+.wp-content blockquote {
+  max-width: 70ch;
 }
 
 .wp-content > *:first-child {
@@ -197,7 +216,9 @@ html { scroll-behavior: smooth; }
 /* Paragraphs */
 .wp-content p {
   margin-top: 0;
-  margin-bottom: 1.5em;
+  /* must stay clearly larger than line-height or paragraphs do not
+     separate visually */
+  margin-bottom: 1.6em;
 }
 
 /* Handle WordPress <br> heavy content — give breathing room */
@@ -229,9 +250,9 @@ html { scroll-behavior: smooth; }
 
 /* Lists */
 .wp-content ul, .wp-content ol {
-  margin-top: 0.75rem;
-  margin-bottom: 1.75rem;
-  padding-left: 2rem;
+  margin-top: 0.5em;
+  margin-bottom: 1.6em;
+  padding-left: 1.6rem;
 }
 
 .wp-content ul {
@@ -255,9 +276,12 @@ html { scroll-behavior: smooth; }
 }
 
 .wp-content li {
-  margin-bottom: 0.6rem;
+  /* list items are usually single lines; full paragraph spacing between
+     them scattered the list */
+  margin-bottom: 0.4em;
   padding-left: 0.4rem;
   display: list-item;
+  line-height: 1.65;
 }
 
 .wp-content li::marker {
