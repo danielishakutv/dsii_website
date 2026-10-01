@@ -115,6 +115,36 @@ export default async function AboutPage() {
         </div>
       </section>
 
+      {/* Our Logo */}
+      <section className="py-20 bg-white border-t border-gray-100">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <img
+            src="/logo.jpg"
+            alt="Deeds Support Initiative International logo"
+            className="h-32 sm:h-40 w-auto object-contain mx-auto mb-8"
+          />
+          <span className="inline-block px-4 py-1 bg-[#1e5c45]/10 text-[#1e5c45] rounded-full text-sm font-medium mb-4">
+            Our Identity
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#1a1a2e] mb-6">
+            Our Logo
+          </h2>
+          <div className="space-y-4 text-gray-600 text-lg leading-relaxed">
+            <p>
+              The DSII logo represents a people-centred commitment to support, protect and
+              empower vulnerable individuals and communities. The interlinked hands symbolise
+              solidarity, partnership and collective responsibility, while the upward-reaching
+              hand reflects empowerment, hope and the opportunity for people to improve their
+              lives.
+            </p>
+            <p>
+              The bold colours convey compassion, energy and our commitment to taking
+              meaningful action in the communities we serve.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Our Story */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
